@@ -1,2 +1,19 @@
-data/raw/CY-Bench
-data/raw/GDHY
+# Ignore raw datasets
+data/raw/
+
+# Ignore processed datasets (optional)
+# data/processed/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Python cache
+__pycache__/
+
+# VS Code settings
+.vscode/
+
+# Compressed files
+*.zip
+*.7z
+*.rar
