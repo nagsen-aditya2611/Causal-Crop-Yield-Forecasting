@@ -1,0 +1,13 @@
+# Ignore raw datasets
+data/raw/
+
+# Ignore compressed files
+*.zip
+*.7z
+*.rar
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Python cache
+__pycache__/
