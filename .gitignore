@@ -1,19 +1,13 @@
-# Ignore raw datasets
+#Ignore datasets
 data/raw/
+data/processed/
 
-# Ignore processed datasets (optional)
-# data/processed/
+#Virtual environment
+.venv/
 
-# Jupyter
-.ipynb_checkpoints/
-
-# Python cache
+#Python cache
 __pycache__/
+*.pyc
 
-# VS Code settings
+#VS Code settings
 .vscode/
-
-# Compressed files
-*.zip
-*.7z
-*.rar
