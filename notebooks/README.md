@@ -16,7 +16,7 @@ The objective is to transform multiple raw datasets into a single machine-learni
 | 02_dataset_preprocessing.ipynb | Data preprocessing and feature engineering | ✅ Completed |
 | 03_exploratory_data_analysis.ipynb | Exploratory Data Analysis | ✅ Completed |
 | 04_causal_graph.ipynb | Expert DAG construction | ✅ Completed|
-| 05_causal_discovery.ipynb | PC / PCMCI algorithms | ✅ Completed|
+| 05_causal_discovery.ipynb | PC / NOTEARS algorithms | ✅ Completed|
 | 06_causal_inference.ipynb | Treatment effect estimation | ⏳ Upcoming |
 | 07_machine_learning.ipynb | ML models | ⏳ Upcoming |
 | 08_interpretability.ipynb | SHAP Analysis | ⏳ Upcoming |
