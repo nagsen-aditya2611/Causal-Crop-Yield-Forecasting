@@ -14,9 +14,9 @@ The objective is to transform multiple raw datasets into a single machine-learni
 |----------|----------|--------|
 | 01_dataset_understanding.ipynb | Data loading and exploration | ✅ Completed |
 | 02_dataset_preprocessing.ipynb | Data preprocessing and feature engineering | ✅ Completed |
-| 03_exploratory_data_analysis.ipynb | Exploratory Data Analysis | ⏳ Upcoming |
-| 04_causal_graph.ipynb | Expert DAG construction | ⏳ Upcoming |
-| 05_causal_discovery.ipynb | PC / PCMCI algorithms | ⏳ Upcoming |
+| 03_exploratory_data_analysis.ipynb | Exploratory Data Analysis | ✅ Completed |
+| 04_causal_graph.ipynb | Expert DAG construction | ✅ Completed|
+| 05_causal_discovery.ipynb | PC / PCMCI algorithms | ✅ Completed|
 | 06_causal_inference.ipynb | Treatment effect estimation | ⏳ Upcoming |
 | 07_machine_learning.ipynb | ML models | ⏳ Upcoming |
 | 08_interpretability.ipynb | SHAP Analysis | ⏳ Upcoming |
@@ -368,60 +368,279 @@ A clean district-year level dataset ready for
 
 ---
 
-# Pipeline Completed So Far
+## Notebook 3 – Exploratory Data Analysis
+
+### Objectives
+
+- Understand dataset structure
+- Analyze missing values
+- Explore feature distributions
+- Detect outliers
+- Study relationships among variables
+- Examine temporal trends
+- Analyze spatial distribution
+- Generate publication-quality figures
+
+### Outputs
+
+- Summary statistics
+- Correlation matrix
+- Yield correlation table
+- 40+ EDA figures
+- Ready for feature engineering
+
+# Notebook 04 – Expert Causal DAG Construction
+
+## Objective
+
+Construct an expert-defined Directed Acyclic Graph (DAG) representing the assumed causal relationships between climatic, soil, vegetation and agricultural variables affecting wheat yield.
+
+This notebook establishes the causal assumptions that will be used throughout the remainder of the project. Unlike machine learning models, causal inference requires explicit assumptions about the data-generating process. The Expert DAG serves as the primary causal model for estimating treatment effects in later notebooks.
+
+---
+
+## Dataset
+
+Input:
 
 ```
-Raw Datasets
-      │
-      ▼
-Date Processing
-      │
-      ▼
-Time Feature Creation
-      │
-      ▼
-Common Time Filtering
-      │
-      ▼
-Yield Selection
-      │
-      ▼
-Calendar Merge
-      │
-      ▼
-Soil Merge
-      │
-      ▼
-Location Merge
-      │
-      ▼
-Crop Mask Merge
-      │
-      ▼
-Seasonal Weather Features
-      │
-      ▼
-Seasonal Soil Moisture Features
-      │
-      ▼
-Seasonal NDVI Features
-      │
-      ▼
-Seasonal FPAR Features
-      │
-      ▼
-Missing Value Handling
-      │
-      ▼
-Final ML Dataset
+data/processed/final_crop_dataset.csv
+```
+
+Output:
+
+```
+figures/figures_dag/
+reports/
 ```
 
 ---
 
-# Current Status
+## Workflow
 
-✅ Notebook 01 Completed
+### 1. Load Processed Dataset
 
-✅ Notebook 02 Completed
+- Import cleaned dataset
+- Verify dataset dimensions
+- Display available variables
 
-⬜ Notebook 03 (Exploratory Data Analysis) is the next stage.
+---
+
+### 2. Define Causal Variables
+
+Selected variables include:
+
+- Treatment Variable
+  - Average Surface Soil Moisture (avg_ssm)
+
+- Outcome Variable
+  - Crop Yield (yield)
+
+- Confounding Variables
+  - Temperature
+  - Radiation
+  - Climatic Water Balance
+  - Soil Characteristics
+  - Geographic Variables
+  - Crop Area Percentage
+  - Harvest Year
+
+---
+
+### 3. Construct Expert DAG
+
+The causal graph was manually designed using domain knowledge from agricultural science and causal inference literature.
+
+Major assumptions include:
+
+- Climate influences soil moisture.
+- Soil properties affect water availability.
+- Vegetation indices depend on climatic conditions.
+- Soil moisture influences vegetation health.
+- Vegetation condition influences crop yield.
+
+---
+
+### 4. DAG Visualization
+
+The notebook generates a publication-quality visualization of the expert causal graph.
+
+Outputs:
+
+```
+figures/figures_dag/
+```
+
+---
+
+### Deliverables
+
+- Expert DAG figure
+- Variable definitions
+- Treatment and outcome specification
+- Confounder identification
+- Causal assumptions documentation
+
+---
+
+# Notebook 05 – Data-Driven Causal Discovery
+
+## Objective
+
+Discover causal relationships directly from observational data and compare the learned structures with the Expert DAG.
+
+Two complementary causal discovery algorithms are implemented:
+
+- PC Algorithm
+- NOTEARS Algorithm
+
+The purpose of this notebook is to validate and compare learned causal structures rather than replace expert knowledge.
+
+---
+
+## Dataset
+
+Input:
+
+```
+data/processed/final_crop_dataset.csv
+```
+
+Output:
+
+```
+figures/figures_causal_discovery/
+reports/
+```
+
+---
+
+## Workflow
+
+### 1. Data Preparation
+
+- Load processed dataset
+- Select variables for causal discovery
+- Standardize numerical features
+- Export variable mapping
+
+---
+
+### 2. PC Algorithm
+
+Constraint-based causal discovery using conditional independence testing.
+
+Generated outputs:
+
+- Learned causal graph
+- Adjacency matrix
+- Edge list
+- Graph statistics
+
+Saved reports:
+
+```
+pc_algorithm_edges.csv
+pc_adjacency_matrix.csv
+decoded_pc_edges.csv
+```
+
+---
+
+### 3. NOTEARS Algorithm
+
+Optimization-based causal discovery using continuous optimization.
+
+Generated outputs:
+
+- Learned DAG
+- Binary adjacency matrix
+- Edge list
+- Network visualization
+- Graph statistics
+
+Saved reports:
+
+```
+notears_adjacency_matrix.csv
+notears_edges.csv
+```
+
+---
+
+### 4. Graph Visualization
+
+Publication-quality graphs are generated for:
+
+- PC Algorithm DAG
+- NOTEARS DAG
+
+Important nodes such as:
+
+- Yield
+- Surface Soil Moisture
+
+are highlighted for better interpretability.
+
+---
+
+### 5. Graph Comparison
+
+A comparison table summarizes:
+
+- Expert DAG
+- PC Algorithm
+- NOTEARS Algorithm
+
+Metrics include:
+
+- Number of Nodes
+- Number of Edges
+- Graph Type
+- Discovery Method
+- Intended Use
+
+---
+
+### 6. Interpretation
+
+The notebook evaluates:
+
+- Agronomically meaningful relationships
+- Missing causal links
+- Spurious relationships
+- Differences between learned and expert graphs
+
+Based on this comparison, the Expert DAG is selected as the primary causal graph for downstream causal effect estimation.
+
+---
+
+### Deliverables
+
+Figures
+
+```
+PC Learned DAG
+NOTEARS Learned DAG
+```
+
+Reports
+
+```
+Variable Mapping
+PC Edge List
+Decoded PC Edge List
+NOTEARS Edge List
+Adjacency Matrices
+Graph Statistics
+Comparison Table
+Causal Discovery Summary
+```
+
+---
+
+## Key Outcome
+
+Although the data-driven algorithms successfully recovered several meaningful causal relationships (e.g., climatic variables influencing soil moisture and vegetation), they failed to identify some important expert-defined pathways such as the direct influence of soil moisture on crop yield.
+
+Therefore, the Expert DAG is retained as the primary causal model for the subsequent causal inference analysis using DoWhy and EconML.

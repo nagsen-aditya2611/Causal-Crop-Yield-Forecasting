@@ -1,0 +1,27 @@
+EXPERT CAUSAL ASSUMPTIONS
+======================================================================
+
+avg_tavg: Seasonal temperature influences evaporation, crop stress, and yield.
+
+avg_tmax: High temperature can reduce wheat productivity during critical growth stages.
+
+avg_tmin: Night-time temperature affects respiration and grain filling.
+
+avg_rad: Solar radiation drives photosynthesis and evapotranspiration.
+
+avg_cwb: Climate water balance reflects water deficit or surplus conditions.
+
+awc: Soil available water capacity determines moisture storage.
+
+bulk_density: Soil compaction affects infiltration and root growth.
+
+drainage_class: Drainage controls water retention and waterlogging risk.
+
+latitude: Represents climatic variation across India.
+
+longitude: Represents regional environmental differences.
+
+crop_area_percentage: Represents agricultural intensity and management level.
+
+harvest_year: Captures yearly climatic and technological variation.
+
