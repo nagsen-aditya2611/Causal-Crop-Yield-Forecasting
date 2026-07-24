@@ -1,35 +1,9 @@
 EXPERT DAG SUMMARY
 ======================================================================
 
-Treatment : avg_ssm
-Outcome : yield
-
-Nodes : 12
-Edges : 24
-
-Edges
-----------------------------------------
-Latitude --> Temperature
-Latitude --> Radiation
-Latitude --> Yield
-Longitude --> Temperature
-Longitude --> Radiation
-Longitude --> Yield
-Temperature --> Climate Water Balance
-Temperature --> Soil Moisture
-Temperature --> NDVI
-Temperature --> Yield
-Radiation --> NDVI
-Radiation --> Yield
-Soil Properties --> Soil Moisture
-Soil Properties --> Yield
-Climate Water Balance --> Soil Moisture
-Climate Water Balance --> Yield
-Soil Moisture --> NDVI
-Soil Moisture --> FPAR
-Soil Moisture --> Yield
-NDVI --> Yield
-FPAR --> Yield
-Agricultural Intensity --> Yield
-Year --> Soil Moisture
-Year --> Yield
+Nodes : 15
+Edges : 21
+Density : 0.100
+Average Degree : 2.80
+Is DAG : True
+Weakly Connected Components : 4

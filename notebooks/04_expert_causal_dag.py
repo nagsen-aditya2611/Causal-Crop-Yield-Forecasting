@@ -1,27 +1,35 @@
+# ============================================================
+# NOTEBOOK 04
+# Expert Causal DAG Construction
+# ============================================================
+
 import warnings
 from pathlib import Path
 
 import pandas as pd
 import matplotlib.pyplot as plt
 import networkx as nx
+from graphviz import Digraph
 
 warnings.filterwarnings("ignore")
 
 plt.style.use("ggplot")
 
+print("="*60)
+print("EXPERT CAUSAL DAG")
+print("="*60)
 print("Libraries Imported Successfully!")
-
-
+# ============================================================
 # OUTPUT DIRECTORIES
+# ============================================================
 
-FIGURE_DIR = Path("figures/figures_dag")
+FIGURE_DIR = Path("figures/figures_expert_dag")
 REPORT_DIR = Path("reports")
 
 FIGURE_DIR.mkdir(parents=True, exist_ok=True)
 REPORT_DIR.mkdir(parents=True, exist_ok=True)
 
-print("Output folders ready!")
-
+print("Output folders created successfully!")
 # ============================================================
 # SAVE FIGURE FUNCTION
 # ============================================================
@@ -31,13 +39,9 @@ def save_plot(filename):
     plt.tight_layout()
 
     plt.savefig(
-
         FIGURE_DIR / filename,
-
         dpi=300,
-
         bbox_inches="tight"
-
     )
 
     plt.close()
@@ -45,288 +49,484 @@ def save_plot(filename):
     print(f"Saved -> {filename}")
 
 # ============================================================
-# LOAD DATA
+# LOAD DATASET
 # ============================================================
 
 df = pd.read_csv(
-
     "data/processed/final_crop_dataset.csv"
-
 )
 
 print("\nDataset Loaded Successfully!")
 
-print(df.shape)
+print("Shape :", df.shape)
 
 print(df.head())
+
 
 # ============================================================
 # DATASET INFORMATION
 # ============================================================
 
 print("="*60)
-
 print("DATASET INFORMATION")
-
 print("="*60)
 
 print()
 
-print("Rows :",df.shape[0])
-
-print("Columns :",df.shape[1])
+print("Rows    :", df.shape[0])
+print("Columns :", df.shape[1])
 
 print()
 
-print(df.columns.tolist())
+print("Column Names")
+
+for col in df.columns:
+    print("-", col)
 
 # ============================================================
-# DEFINE CAUSAL VARIABLES
+# VARIABLE CATEGORIZATION
 # ============================================================
 
-TREATMENT = "avg_ssm"
+GEOGRAPHY = [
+    "latitude"
+]
 
-OUTCOME = "yield"
-
-CONFOUNDERS = [
-
+CLIMATE = [
     "avg_tavg",
-    "avg_tmax",
-    "avg_tmin",
     "avg_rad",
-    "avg_cwb",
+    "avg_cwb"
+]
+
+SOIL = [
     "awc",
     "bulk_density",
-    "drainage_class",
-    "latitude",
-    "longitude",
-    "crop_area_percentage",
+    "drainage_class"
+]
+
+TREATMENT = [
+    "avg_ssm"
+]
+
+MEDIATORS = [
+    "avg_ndvi",
+    "avg_fpar"
+]
+
+TIME = [
     "harvest_year"
+]
+
+OUTCOME = [
+    "yield"
+]
+
+print("="*60)
+print("VARIABLE GROUPS")
+print("="*60)
+
+print("\nGeography")
+print(GEOGRAPHY)
+
+print("\nClimate")
+print(CLIMATE)
+
+print("\nSoil")
+print(SOIL)
+
+print("\nTreatment")
+print(TREATMENT)
+
+print("\nMediators")
+print(MEDIATORS)
+
+print("\nTime")
+print(TIME)
+
+print("\nOutcome")
+print(OUTCOME)
+
+# ============================================================
+# SCIENTIFIC ASSUMPTIONS
+# ============================================================
+
+assumptions = pd.DataFrame({
+
+    "Cause": [
+
+        "Latitude",
+        "Latitude",
+
+        "Harvest Year",
+        "Harvest Year",
+
+        "Average Temperature",
+        "Average Temperature",
+        "Average Temperature",
+
+        "Solar Radiation",
+        "Solar Radiation",
+        "Solar Radiation",
+
+        "Climate Water Balance",
+
+        "Available Water Capacity",
+        "Bulk Density",
+        "Drainage Class",
+
+        "Soil Moisture",
+        "Soil Moisture",
+        "Soil Moisture",
+
+        "NDVI",
+        "FPAR"
+
+    ],
+
+    "Effect":[
+
+        "Average Temperature",
+        "Solar Radiation",
+
+        "Average Temperature",
+        "Climate Water Balance",
+
+        "Climate Water Balance",
+        "Soil Moisture",
+        "NDVI",
+
+        "NDVI",
+        "FPAR",
+        "Soil Moisture",
+
+        "Soil Moisture",
+
+        "Soil Moisture",
+        "Soil Moisture",
+        "Soil Moisture",
+
+        "NDVI",
+        "FPAR",
+        "Yield",
+
+        "Yield",
+        "Yield"
+
+    ],
+
+    "Scientific Justification":[
+
+        "Latitude influences regional climatic conditions and temperature.",
+
+        "Latitude determines incoming solar energy received by crops.",
+
+        "Climate varies across years due to interannual weather variability.",
+
+        "Annual rainfall and water balance change over years.",
+
+        "Temperature affects evapotranspiration and water demand.",
+
+        "Temperature influences seasonal soil moisture through evaporation.",
+
+        "Crop growth depends strongly on temperature.",
+
+        "Solar radiation drives photosynthesis.",
+
+        "FPAR depends on incoming radiation absorbed by vegetation.",
+
+        "Radiation influences soil drying and evaporation.",
+
+        "Climate water balance determines available soil water.",
+
+        "High available water capacity improves soil moisture retention.",
+
+        "Dense soils alter infiltration and water storage.",
+
+        "Drainage controls water loss from soil.",
+
+        "Higher soil moisture promotes vegetation growth (NDVI).",
+
+        "Higher soil moisture increases canopy development (FPAR).",
+
+        "Soil moisture directly affects crop yield.",
+
+        "Vegetation vigor contributes to grain production.",
+
+        "Greater absorbed radiation improves biomass and yield."
+
+    ]
+
+})
+
+print("="*70)
+
+print("SCIENTIFIC ASSUMPTIONS")
+
+print("="*70)
+
+print(assumptions)
+
+assumptions.to_csv(
+
+    REPORT_DIR / "expert_dag_assumptions.csv",
+
+    index=False
+
+)
+
+print("Scientific assumptions exported successfully!")
+
+# ============================================================
+# FINAL EXPERT DAG
+# ============================================================
+
+expert_edges = [
+
+    # ========================================================
+    # GEOGRAPHY
+    # ========================================================
+
+    ("latitude", "avg_tavg"),
+
+    # ========================================================
+    # TEMPORAL
+    # ========================================================
+
+    ("harvest_year", "avg_tavg"),
+    ("harvest_year", "avg_cwb"),
+
+    # ========================================================
+    # CLIMATE
+    # ========================================================
+
+    ("avg_tavg", "avg_cwb"),
+    ("avg_rad", "avg_cwb"),
+
+    # ========================================================
+    # SOIL
+    # ========================================================
+
+    ("awc", "avg_ssm"),
+    ("bulk_density", "avg_ssm"),
+    ("drainage_class", "avg_ssm"),
+
+    # ========================================================
+    # CLIMATE → SOIL MOISTURE
+    # ========================================================
+
+    ("avg_cwb", "avg_ssm"),
+
+    # ========================================================
+    # TREATMENT → MEDIATORS
+    # ========================================================
+
+    ("avg_ssm", "avg_ndvi"),
+    ("avg_ssm", "avg_fpar"),
+
+    # ========================================================
+    # MEDIATORS → OUTCOME
+    # ========================================================
+
+    ("avg_ndvi", "yield"),
+    ("avg_fpar", "yield"),
+
+    # ========================================================
+    # DIRECT EFFECT
+    # ========================================================
+
+    ("avg_ssm", "yield")
 
 ]
 
-print("Treatment :", TREATMENT)
+print("="*70)
 
-print("Outcome :", OUTCOME)
+print("EXPERT DAG EDGES")
+
+print("="*70)
+
+for source, target in expert_edges:
+
+    print(f"{source:20s} -----> {target}")
 
 print()
 
-print("Confounders")
+print("Total Expert Relationships :", len(expert_edges))
 
-for c in CONFOUNDERS:
-
-    print("-", c)
 
 # ============================================================
-# EXPERT CAUSAL ASSUMPTIONS
+# BUILD EXPERT DAG
 # ============================================================
-
-print("\n" + "="*70)
-print("EXPERT CAUSAL ASSUMPTIONS")
-print("="*70)
-
-causal_assumptions = {
-
-    "avg_tavg": "Seasonal temperature influences evaporation, crop stress, and yield.",
-
-    "avg_tmax": "High temperature can reduce wheat productivity during critical growth stages.",
-
-    "avg_tmin": "Night-time temperature affects respiration and grain filling.",
-
-    "avg_rad": "Solar radiation drives photosynthesis and evapotranspiration.",
-
-    "avg_cwb": "Climate water balance reflects water deficit or surplus conditions.",
-
-    "awc": "Soil available water capacity determines moisture storage.",
-
-    "bulk_density": "Soil compaction affects infiltration and root growth.",
-
-    "drainage_class": "Drainage controls water retention and waterlogging risk.",
-
-    "latitude": "Represents climatic variation across India.",
-
-    "longitude": "Represents regional environmental differences.",
-
-    "crop_area_percentage": "Represents agricultural intensity and management level.",
-
-    "harvest_year": "Captures yearly climatic and technological variation."
-
-}
-
-for var, reason in causal_assumptions.items():
-
-    print(f"\n{var}")
-
-    print(f"  - {reason}")
-
-with open(REPORT_DIR / "causal_assumptions.txt", "w") as f:
-
-    f.write("EXPERT CAUSAL ASSUMPTIONS\n")
-
-    f.write("=" * 70 + "\n\n")
-
-    for var, reason in causal_assumptions.items():
-
-        f.write(f"{var}: {reason}\n\n")
-
-print("\nCausal assumptions exported successfully!")
-
-# ============================================================
-# BUILD EXPERT CAUSAL DAG
-# ============================================================
-
-print("\n" + "="*70)
-print("BUILDING EXPERT CAUSAL DAG")
-print("="*70)
 
 G = nx.DiGraph()
 
-nodes = [
+G.add_edges_from(expert_edges)
 
-    "Latitude",
-    "Longitude",
-    "Temperature",
-    "Radiation",
-    "Soil Properties",
-    "Climate Water Balance",
-    "Soil Moisture",
-    "NDVI",
-    "FPAR",
-    "Agricultural Intensity",
-    "Year",
-    "Yield"
+print("="*70)
 
-]
+print("GRAPH CREATED")
 
-G.add_nodes_from(nodes)
+print("="*70)
 
-edges = [
+print()
 
-    ("Latitude", "Temperature"),
-    ("Latitude", "Radiation"),
-    ("Latitude", "Yield"),
+print("Nodes :", G.number_of_nodes())
 
-    ("Longitude", "Temperature"),
-    ("Longitude", "Radiation"),
-    ("Longitude", "Yield"),
+print("Edges :", G.number_of_edges())
 
-    ("Temperature", "Climate Water Balance"),
-    ("Temperature", "Soil Moisture"),
-    ("Temperature", "NDVI"),
-    ("Temperature", "Yield"),
+print()
 
-    ("Radiation", "NDVI"),
-    ("Radiation", "Yield"),
-
-    ("Soil Properties", "Soil Moisture"),
-    ("Soil Properties", "Yield"),
-
-    ("Climate Water Balance", "Soil Moisture"),
-    ("Climate Water Balance", "Yield"),
-
-    ("Soil Moisture", "NDVI"),
-    ("Soil Moisture", "FPAR"),
-    ("Soil Moisture", "Yield"),
-
-    ("NDVI", "Yield"),
-    ("FPAR", "Yield"),
-
-    ("Agricultural Intensity", "Yield"),
-
-    ("Year", "Soil Moisture"),
-    ("Year", "Yield")
-
-]
-
-G.add_edges_from(edges)
-
-print(f"\nNodes : {G.number_of_nodes()}")
-
-print(f"Edges : {G.number_of_edges()}")
-
-print("\nGraph Created Successfully!")
+print("Is DAG :", nx.is_directed_acyclic_graph(G))
 
 # ============================================================
-# VISUALIZE EXPERT DAG
+# MANUAL DAG LAYOUT
 # ============================================================
-
-print("\nGenerating DAG Figure...")
-
-plt.figure(figsize=(16,10))
 
 pos = {
 
-    "Latitude":(-3,3),
-    "Longitude":(-3,1),
+    # ----------------------------
+    # Background
+    # ----------------------------
 
-    "Temperature":(-1,3),
-    "Radiation":(-1,1),
+    "latitude": (-3,9),
 
-    "Soil Properties":(-1,-1),
+    "harvest_year": (3,9),
 
-    "Climate Water Balance":(1,3),
-    "Soil Moisture":(1,1),
+    # ----------------------------
+    # Climate
+    # ----------------------------
 
-    "NDVI":(3,2),
-    "FPAR":(3,0),
+    "avg_tavg": (0,7.3),
 
-    "Agricultural Intensity":(1,-2),
+    "avg_rad": (-3,6),
 
-    "Year":(-3,-2),
+    "avg_cwb": (0,5.4),
 
-    "Yield":(5,1)
+    # ----------------------------
+    # Soil
+    # ----------------------------
+
+    "awc": (-4,3.5),
+
+    "bulk_density": (0,3.5),
+
+    "drainage_class": (4,3.5),
+
+    # ----------------------------
+    # Treatment
+    # ----------------------------
+
+    "avg_ssm": (0,2),
+
+    # ----------------------------
+    # Mediators
+    # ----------------------------
+
+    "avg_ndvi": (-2,0),
+
+    "avg_fpar": (2,0),
+
+    # ----------------------------
+    # Outcome
+    # ----------------------------
+
+    "yield": (0,-2)
 
 }
 
-node_colors = []
 
-for node in G.nodes():
+# ============================================================
+# NODE COLORS
+# ============================================================
 
-    if node == "Soil Moisture":
+color_map = {
 
-        node_colors.append("orange")
+    "latitude":"#C39BD3",
+    "harvest_year":"#C39BD3",
 
-    elif node == "Yield":
+    "avg_tavg":"#5DADE2",
+    "avg_rad":"#5DADE2",
+    "avg_cwb":"#5DADE2",
 
-        node_colors.append("red")
+    "awc":"#D2B48C",
+    "bulk_density":"#D2B48C",
+    "drainage_class":"#D2B48C",
 
-    elif node in ["NDVI","FPAR"]:
+    "avg_ssm":"#F5B041",
 
-        node_colors.append("lightgreen")
+    "avg_ndvi":"#58D68D",
+    "avg_fpar":"#58D68D",
 
-    else:
+    "yield":"#EC7063"
 
-        node_colors.append("skyblue")
+}
 
-nx.draw_networkx(
+node_colors = [
+
+    color_map[node]
+
+    for node in G.nodes()
+
+]
+
+# ============================================================
+# DRAW EXPERT DAG
+# ============================================================
+plt.style.use("default")
+
+plt.figure(figsize=(14,11))
+
+nx.draw_networkx_nodes(
 
     G,
 
-    pos=pos,
+    pos,
 
     node_color=node_colors,
 
-    node_size=4200,
+    node_size=3300,
 
-    font_size=10,
+    edgecolors="black",
 
-    font_weight="bold",
+    linewidths=1.8
+
+)
+
+nx.draw_networkx_edges(
+
+    G,
+
+    pos,
 
     arrows=True,
 
-    arrowsize=22,
+    arrowstyle="-|>",
+
+    arrowsize=25,
+
+    width=2.3,
 
     edge_color="gray",
 
-    width=2
+    connectionstyle="arc3,rad=0.05"
+
+)
+
+nx.draw_networkx_labels(
+
+    G,
+
+    pos,
+
+    font_size=10,
+
+    font_weight="bold"
 
 )
 
 plt.title(
 
-    "Expert Causal DAG\nSeasonal Soil Moisture → Wheat Yield",
+    "Expert Knowledge-Based Causal Directed Acyclic Graph",
 
-    fontsize=16,
+    fontsize=18,
 
     weight="bold"
 
@@ -334,56 +534,80 @@ plt.title(
 
 plt.axis("off")
 
-save_plot("expert_causal_dag.png")
+save_plot("01_expert_dag.png")
 
-print("Expert DAG Saved Successfully!")
+print("Expert DAG Figure Saved Successfully!")
+
 
 # ============================================================
-# EXPORT DAG
+# GRAPHVIZ PUBLICATION-QUALITY DAG
 # ============================================================
 
-nx.write_gml(
-
-    G,
-
-    REPORT_DIR / "expert_causal_dag.gml"
-
+dot = Digraph(
+    "Expert_DAG",
+    format="png"
 )
 
-with open(
+dot.attr(rankdir="TB")
+dot.attr(splines="ortho")
+dot.attr(nodesep="0.45")
+dot.attr(ranksep="0.75")
+dot.attr(fontname="Helvetica")
 
-    REPORT_DIR / "expert_dag_summary.txt",
+# ============================================================
+# NODE STYLE
+# ============================================================
 
-    "w"
+dot.attr(
+    "node",
+    shape="box",
+    style="rounded,filled",
+    fontname="Helvetica",
+    fontsize="11",
+    color="black"
+)
 
-) as f:
+# ============================================================
+# NODES
+# ============================================================
 
-    f.write("EXPERT DAG SUMMARY\n")
+dot.node("latitude", "Latitude", fillcolor="#D6CDEA")
 
-    f.write("="*70 + "\n\n")
+dot.node("harvest_year", "Harvest Year", fillcolor="#D6CDEA")
 
-    f.write(f"Treatment : {TREATMENT}\n")
+dot.node("avg_tavg", "Average\nTemperature", fillcolor="#AED6F1")
 
-    f.write(f"Outcome : {OUTCOME}\n\n")
+dot.node("avg_rad", "Solar\nRadiation", fillcolor="#AED6F1")
 
-    f.write(f"Nodes : {G.number_of_nodes()}\n")
+dot.node("avg_cwb", "Climate Water\nBalance", fillcolor="#AED6F1")
 
-    f.write(f"Edges : {G.number_of_edges()}\n\n")
+dot.node("awc", "Available Water\nCapacity", fillcolor="#F5CBA7")
 
-    f.write("Edges\n")
+dot.node("bulk_density", "Bulk\nDensity", fillcolor="#F5CBA7")
 
-    f.write("-"*40 + "\n")
+dot.node("drainage_class", "Drainage\nClass", fillcolor="#F5CBA7")
 
-    for edge in G.edges():
+dot.node("avg_ssm", "Soil Moisture\n(Treatment)", fillcolor="#F8C471")
 
-        f.write(f"{edge[0]} --> {edge[1]}\n")
+dot.node("avg_ndvi", "NDVI", fillcolor="#ABEBC6")
 
-print("\nExpert DAG Exported Successfully!")
+dot.node("avg_fpar", "FPAR", fillcolor="#ABEBC6")
 
-print("\nNotebook 4 Completed Successfully!")
+dot.node("yield", "Crop Yield", fillcolor="#F1948A")
 
-print(f"\nFigure Saved : {FIGURE_DIR / 'expert_causal_dag.png'}")
+# ============================================================
+# EDGES
+# ============================================================
 
-print(f"GML Saved    : {REPORT_DIR / 'expert_causal_dag.gml'}")
+for source, target in expert_edges:
+    dot.edge(source, target)
 
-print(f"Summary      : {REPORT_DIR / 'expert_dag_summary.txt'}")
+# ============================================================
+# SAVE GRAPHVIZ DAG
+# ============================================================
+
+graphviz_path = FIGURE_DIR / "02_graphviz_expert_dag"
+
+dot.render(str(graphviz_path), cleanup=True)
+
+print("Graphviz Expert DAG Saved Successfully!")

@@ -1,0 +1,16 @@
+Variable,Role,Reason
+yield,Outcome,Final wheat productivity to be explained.
+avg_ssm,Treatment,Seasonal surface soil moisture whose causal effect on yield is estimated.
+avg_tavg,Confounder,Average temperature influences both soil moisture and crop growth.
+avg_tmin,Confounder,Minimum temperature affects crop development and water demand.
+avg_tmax,Confounder,Maximum temperature influences heat stress and evapotranspiration.
+avg_rad,Confounder,Solar radiation affects photosynthesis and soil evaporation.
+avg_cwb,Confounder,Climate water balance determines water availability for crops.
+avg_ndvi,Mediator,Vegetation health indicator affected by climate and soil moisture.
+avg_fpar,Mediator,Fraction of absorbed photosynthetically active radiation representing canopy productivity.
+awc,Confounder,Available water capacity controls soil water storage.
+bulk_density,Confounder,Bulk density influences infiltration and root growth.
+drainage_class,Confounder,Drainage controls movement and retention of water in soil.
+latitude,Background Variable,Latitude affects climatic conditions such as temperature and radiation.
+harvest_year,Background Variable,"Represents temporal changes in weather, technology and management."
+crop_area_percentage,Management Variable,Represents agricultural intensity and management practices.

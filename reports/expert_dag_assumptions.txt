@@ -1,0 +1,27 @@
+EXPERT DAG ASSUMPTIONS
+================================================================================
+
+1. Latitude influences regional climatic conditions such as average temperature and incoming solar radiation.
+
+2. Harvest year captures temporal variation in climate, agricultural technology, crop varieties and management practices.
+
+3. Climatic variables (temperature, radiation and climatic water balance) directly influence soil moisture dynamics through evaporation, transpiration and water availability.
+
+4. Soil properties (available water capacity, bulk density and drainage class) determine the storage, movement and retention of water within the soil profile.
+
+5. Surface soil moisture is the primary treatment variable and directly affects crop water availability.
+
+6. Surface soil moisture influences vegetation condition, which is represented by NDVI.
+
+7. NDVI influences FPAR because healthier vegetation intercepts and absorbs more photosynthetically active radiation.
+
+8. Vegetation health (NDVI and FPAR) directly influences crop productivity and final yield.
+
+9. Temperature may directly influence crop yield through heat stress and crop development, independent of soil moisture.
+
+10. Climatic Water Balance directly influences crop yield because prolonged water deficit reduces productivity even after accounting for soil moisture.
+
+11. Crop Area Percentage is used as a proxy for agricultural intensity and management practices that may influence crop productivity.
+
+12. The Expert DAG is constructed using agronomic knowledge and published literature rather than purely statistical associations.
+
