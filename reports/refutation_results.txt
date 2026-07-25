@@ -1,0 +1,19 @@
+Random Common Cause
+Refute: Add a random common cause
+Estimated effect:-0.24142178576386142
+New effect:-0.2414310661262374
+p value:0.8799999999999999
+
+
+Placebo Test
+Refute: Use a Placebo Treatment
+Estimated effect:-0.24142178576386142
+New effect:-2.3563000661752653e-07
+p value:0.0
+
+
+Data Subset Test
+Refute: Use a subset of data
+Estimated effect:-0.24142178576386142
+New effect:-0.24122349282571476
+p value:0.98
