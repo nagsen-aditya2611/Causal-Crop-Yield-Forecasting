@@ -24,5 +24,3 @@ reports/
 figures/
 references/
 ```
-
-**Status:** 🚧 Project setup in progress.
