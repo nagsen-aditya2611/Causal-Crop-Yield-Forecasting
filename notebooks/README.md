@@ -12,16 +12,16 @@ The objective is to transform multiple raw datasets into a single machine-learni
 
 | Notebook | Purpose | Status |
 |----------|----------|--------|
-| 01_dataset_understanding.ipynb | Data loading and exploration | ✅ Completed |
-| 02_dataset_preprocessing.ipynb | Data preprocessing and feature engineering | ✅ Completed |
+| 01_dataset_understanding.ipynb | Dataset Understanding | ✅ Completed |
+| 02_dataset_preprocessing.ipynb | Data Preprocessing & Feature Engineering | ✅ Completed |
 | 03_exploratory_data_analysis.ipynb | Exploratory Data Analysis | ✅ Completed |
-| 04_causal_graph.ipynb | Expert DAG construction | ✅ Completed|
-| 05_causal_discovery.ipynb | PC / NOTEARS algorithms | ✅ Completed|
-| 06_causal_inference.ipynb | Treatment effect estimation | ⏳ Upcoming |
-| 07_machine_learning.ipynb | ML models | ⏳ Upcoming |
-| 08_interpretability.ipynb | SHAP Analysis | ⏳ Upcoming |
-
----
+| 04_expert_causal_dag.ipynb | Expert DAG Construction | ✅ Completed |
+| 05_causal_discovery.ipynb | Data-driven Causal Discovery (PC & NOTEARS) | ✅ Completed |
+| 06_treatment_outcome_selection.ipynb | Treatment, Outcome & Confounder Selection | ✅ Completed |
+| 07_causal_effect_estimation.ipynb | Causal Effect Estimation | ✅ Completed |
+| 08_causal_feature_selection.ipynb | Causal Feature Selection | ⏳ Upcoming |
+| 09_machine_learning_models.ipynb | Machine Learning Models | ⏳ Upcoming |
+| 10_model_explainability.ipynb | Explainability (SHAP) | ⏳ Upcoming |
 
 # Notebook 01 : Dataset Understanding
 
@@ -644,3 +644,231 @@ Causal Discovery Summary
 Although the data-driven algorithms successfully recovered several meaningful causal relationships (e.g., climatic variables influencing soil moisture and vegetation), they failed to identify some important expert-defined pathways such as the direct influence of soil moisture on crop yield.
 
 Therefore, the Expert DAG is retained as the primary causal model for the subsequent causal inference analysis using DoWhy and EconML.
+
+# Notebook 06 – Treatment & Outcome Selection
+
+## Objective
+
+Select the treatment variable, outcome variable and adjustment variables using the Expert Causal DAG.
+
+This notebook translates the causal assumptions into variables that can be directly used for causal effect estimation.
+
+---
+
+## Treatment Variable
+
+Average Surface Soil Moisture
+
+
+---
+
+## Outcome Variable
+
+Crop Yield
+
+
+---
+
+## Confounding Variables
+
+The following variables are adjusted to satisfy the backdoor criterion:
+
+- Average Temperature
+- Solar Radiation
+- Climate Water Balance
+- Available Water Capacity
+- Bulk Density
+- Drainage Class
+- Harvest Year
+
+---
+
+## Output
+
+- Treatment variable
+- Outcome variable
+- Confounder list
+- Final adjustment set
+
+These variables are directly used in Notebook 07.
+
+# Notebook 07 – Causal Effect Estimation
+
+## Objective
+
+Estimate the causal effect of seasonal surface soil moisture on wheat yield using multiple causal inference methods.
+
+This notebook evaluates whether increasing soil moisture causes an increase or decrease in crop yield after adjusting for confounding variables.
+
+---
+
+## Dataset
+
+Input
+
+
+---
+
+## Workflow
+
+### 1. Build Causal Model
+
+Using DoWhy:
+
+- Treatment
+- Outcome
+- Confounders
+
+---
+
+### 2. Identify Causal Estimand
+
+Estimate the Average Treatment Effect (ATE) under the backdoor adjustment criterion.
+
+---
+
+### 3. Linear Regression Adjustment
+
+Baseline causal estimator using linear regression adjustment.
+
+Output
+
+- Average Treatment Effect
+
+---
+
+### 4. Propensity Score Estimation
+
+Estimate treatment probabilities using Logistic Regression.
+
+Generated outputs
+
+- Propensity Scores
+- Propensity Score Distribution
+
+---
+
+### 5. Propensity Score Matching (PSM)
+
+Nearest-neighbour matching was performed to create balanced treatment and control groups.
+
+Generated outputs
+
+- Matched Dataset
+- Estimated PSM ATE
+
+---
+
+### 6. Love Plot
+
+Evaluate covariate balance before and after matching using Standardized Mean Differences (SMD).
+
+Generated output
+
+- Love Plot
+
+---
+
+### 7. Inverse Probability Weighting (IPW)
+
+Estimate treatment effects using stabilized inverse probability weights.
+
+Generated outputs
+
+- Stabilized Weights
+- Weighted ATE
+
+---
+
+### 8. Augmented Inverse Probability Weighting (AIPW)
+
+Estimate doubly robust treatment effects combining outcome modelling and propensity weighting.
+
+Generated output
+
+- AIPW Estimate
+
+---
+
+### 9. Double Machine Learning (LinearDML)
+
+Estimate heterogeneous treatment effects using EconML.
+
+Generated outputs
+
+- Average Treatment Effect
+- Individual Treatment Effects (ITE)
+
+---
+
+### 10. Refutation Tests
+
+Validate causal estimates using DoWhy robustness checks.
+
+Implemented
+
+- Random Common Cause
+- Placebo Treatment
+- Data Subset Refuter
+
+---
+
+### 11. Method Comparison
+
+Compare causal estimates obtained from
+
+- Linear Regression
+- PSM
+- IPW
+- LinearDML
+
+Generated output
+
+- ATE Comparison Figure
+
+---
+
+### Deliverables
+
+Figures
+
+- Propensity Score Distribution
+- Love Plot
+- ATE Comparison
+- ITE Distribution
+
+Reports
+
+- ATE Estimates
+- PSM Results
+- IPW Results
+- AIPW Results
+- LinearDML Results
+- Refutation Results
+
+---
+
+## Key Outcome
+
+Multiple causal inference methods consistently indicate that seasonal surface soil moisture has a measurable causal effect on crop yield.
+
+The robustness of the estimates is supported by successful refutation tests and comparison across several causal estimation techniques.
+
+---
+
+# Technologies Used
+
+- Python
+- Pandas
+- NumPy
+- Matplotlib
+- Seaborn
+- Scikit-learn
+- DoWhy
+- EconML
+- NetworkX
+- Graphviz
+- Pydot
+- CausalLearn
+- NOTEARS
+- XGBoost
