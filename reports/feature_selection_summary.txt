@@ -1,0 +1,17 @@
+CAUSAL FEATURE SELECTION SUMMARY
+==================================================
+
+Total Variables : 28
+Target Variable : yield
+Causal Features : 7
+Remaining Features : 20
+
+Selected Features
+
+avg_ssm
+avg_tavg
+avg_rad
+avg_cwb
+awc
+bulk_density
+drainage_class

@@ -1,0 +1,20 @@
+Cause,Effect,Scientific Justification
+Latitude,Average Temperature,Latitude influences regional climatic conditions and temperature.
+Latitude,Solar Radiation,Latitude determines incoming solar energy received by crops.
+Harvest Year,Average Temperature,Climate varies across years due to interannual weather variability.
+Harvest Year,Climate Water Balance,Annual rainfall and water balance change over years.
+Average Temperature,Climate Water Balance,Temperature affects evapotranspiration and water demand.
+Average Temperature,Soil Moisture,Temperature influences seasonal soil moisture through evaporation.
+Average Temperature,NDVI,Crop growth depends strongly on temperature.
+Solar Radiation,NDVI,Solar radiation drives photosynthesis.
+Solar Radiation,FPAR,FPAR depends on incoming radiation absorbed by vegetation.
+Solar Radiation,Soil Moisture,Radiation influences soil drying and evaporation.
+Climate Water Balance,Soil Moisture,Climate water balance determines available soil water.
+Available Water Capacity,Soil Moisture,High available water capacity improves soil moisture retention.
+Bulk Density,Soil Moisture,Dense soils alter infiltration and water storage.
+Drainage Class,Soil Moisture,Drainage controls water loss from soil.
+Soil Moisture,NDVI,Higher soil moisture promotes vegetation growth (NDVI).
+Soil Moisture,FPAR,Higher soil moisture increases canopy development (FPAR).
+Soil Moisture,Yield,Soil moisture directly affects crop yield.
+NDVI,Yield,Vegetation vigor contributes to grain production.
+FPAR,Yield,Greater absorbed radiation improves biomass and yield.

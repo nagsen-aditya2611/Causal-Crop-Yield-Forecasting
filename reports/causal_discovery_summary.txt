@@ -1,0 +1,56 @@
+
+============================================================
+CAUSAL DISCOVERY SUMMARY
+============================================================
+
+1. Expert DAG
+
+The Expert DAG was constructed using established
+agricultural knowledge and agronomic literature.
+It explicitly represents assumed causal pathways
+between climate, soil, vegetation and crop yield.
+
+------------------------------------------------------------
+
+2. PC Algorithm
+
+The PC Algorithm discovered a larger causal graph
+using conditional independence testing.
+Several statistically inferred relationships were
+identified; however, some agronomically expected
+relationships were absent or incorrectly oriented.
+
+------------------------------------------------------------
+
+3. NOTEARS
+
+NOTEARS produced a much sparser directed graph.
+Several meaningful relationships were recovered,
+including
+
+• avg_rad → avg_tmax
+• avg_tmax → avg_tavg
+• avg_cwb → avg_ssm
+• avg_ssm → avg_rsm
+• avg_ndvi → avg_fpar
+
+However, important expert relationships such as
+
+avg_ssm → yield
+
+were not recovered.
+
+------------------------------------------------------------
+
+4. Final Decision
+
+For downstream causal effect estimation
+(DoWhy, EconML, Double Machine Learning),
+the Expert DAG will be used because it is based
+on domain knowledge rather than purely statistical
+associations.
+
+The learned DAGs are retained for comparison and
+validation purposes only.
+
+============================================================

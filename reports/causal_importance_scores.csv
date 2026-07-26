@@ -1,0 +1,8 @@
+Feature,Expert_DAG,NOTEARS,Causal_Effect,Total Score
+avg_ssm,3,3,3,9
+avg_tavg,3,2,2,7
+avg_rad,3,2,2,7
+avg_cwb,2,2,2,6
+awc,2,1,2,5
+bulk_density,2,1,1,4
+drainage_class,2,1,1,4

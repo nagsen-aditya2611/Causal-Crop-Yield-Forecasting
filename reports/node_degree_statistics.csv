@@ -1,0 +1,16 @@
+Variable,In_Degree,Out_Degree,Total_Degree
+avg_fpar,6,0,6
+awc,4,1,5
+avg_rad,2,3,5
+bulk_density,2,3,5
+harvest_year,3,2,5
+avg_ndvi,4,0,4
+avg_tmin,2,2,4
+drainage_class,0,4,4
+avg_cwb,2,2,4
+avg_tavg,0,3,3
+avg_ssm,3,0,3
+avg_tmax,0,3,3
+crop_area_percentage,0,3,3
+avg_rsm,0,2,2
+yield,0,0,0

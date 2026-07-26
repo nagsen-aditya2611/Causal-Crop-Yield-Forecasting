@@ -1,0 +1,36 @@
+DATASET SUMMARY
+============================================================
+
+Rows : 6715
+Columns : 28
+Duplicate Rows : 0
+
+Missing Values
+Series([], dtype: int64)
+
+Correlation with Yield
+production              0.748779
+crop_area_percentage    0.698233
+harvest_area            0.613639
+latitude                0.530997
+avg_fpar                0.528018
+crop_area               0.450507
+drainage_class          0.345691
+avg_ndvi                0.340517
+sos                     0.312789
+harvest_year            0.205380
+awc                     0.049783
+bulk_density            0.033599
+avg_cwb                -0.098077
+eos                    -0.106991
+region_area            -0.198285
+avg_vpd                -0.212670
+avg_et0                -0.262486
+avg_rad                -0.312499
+longitude              -0.370077
+avg_tmax               -0.397510
+avg_ssm                -0.407277
+avg_rsm                -0.460810
+avg_tavg               -0.504791
+avg_tmin               -0.554128
+Name: yield, dtype: float64

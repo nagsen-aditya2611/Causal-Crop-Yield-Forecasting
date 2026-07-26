@@ -1,0 +1,2 @@
+Treatment,Outcome,Confounders,Mediators
+avg_ssm,yield,"avg_tavg, avg_rad, avg_cwb, awc, bulk_density, drainage_class, harvest_year","avg_ndvi, avg_fpar"

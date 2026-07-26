@@ -1,0 +1,7 @@
+Criterion,Expert DAG,PC Algorithm,NOTEARS
+Method,Domain Knowledge,Constraint Based,Optimization Based
+Number of Nodes,15,15,11
+Number of Edges,User Defined,29,10
+Graph Type,Directed,Directed,Directed
+Based On,Agricultural Expertise,Conditional Independence,Continuous Optimization
+Used for Causal Estimation,Yes,No,No

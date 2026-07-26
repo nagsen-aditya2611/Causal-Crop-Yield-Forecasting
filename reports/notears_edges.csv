@@ -1,0 +1,11 @@
+Source,Target
+avg_ssm,avg_rsm
+avg_ndvi,avg_fpar
+avg_ndvi,avg_cwb
+avg_fpar,crop_area_percentage
+avg_tavg,avg_tmin
+avg_tmax,avg_tavg
+avg_rad,avg_tmax
+avg_cwb,avg_ssm
+avg_cwb,avg_rad
+crop_area_percentage,yield

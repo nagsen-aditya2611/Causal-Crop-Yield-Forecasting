@@ -1,0 +1,16 @@
+Node_ID,Variable
+X0,yield
+X1,avg_ssm
+X2,avg_rsm
+X3,avg_ndvi
+X4,avg_fpar
+X5,avg_tavg
+X6,avg_tmin
+X7,avg_tmax
+X8,avg_rad
+X9,avg_cwb
+X10,awc
+X11,bulk_density
+X12,drainage_class
+X13,crop_area_percentage
+X14,harvest_year

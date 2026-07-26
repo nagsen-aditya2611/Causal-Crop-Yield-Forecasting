@@ -1,0 +1,16 @@
+,yield,avg_ssm,avg_rsm,avg_ndvi,avg_fpar,avg_tavg,avg_tmin,avg_tmax,avg_rad,avg_cwb,awc,bulk_density,drainage_class,crop_area_percentage,harvest_year
+yield,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+avg_ssm,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+avg_rsm,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+avg_ndvi,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0
+avg_fpar,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+avg_tavg,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+avg_tmin,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+avg_tmax,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+avg_rad,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+avg_cwb,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0
+awc,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+bulk_density,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+drainage_class,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+crop_area_percentage,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+harvest_year,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

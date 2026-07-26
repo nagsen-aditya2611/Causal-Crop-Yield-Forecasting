@@ -1,0 +1,9 @@
+EXPERT DAG SUMMARY
+======================================================================
+
+Nodes : 15
+Edges : 21
+Density : 0.100
+Average Degree : 2.80
+Is DAG : True
+Weakly Connected Components : 4
