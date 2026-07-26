@@ -1,0 +1,5 @@
+Model,All Features R2,Causal Features R2,Performance Retained (%)
+Linear Regression,0.742,0.532,71.692
+Random Forest,0.891,0.806,90.476
+XGBoost,0.904,0.824,91.128
+LightGBM,0.897,0.822,91.625
