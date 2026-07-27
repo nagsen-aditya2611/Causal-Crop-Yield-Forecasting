@@ -541,6 +541,28 @@ joblib.dump(
 
 )
 
+# ============================================================
+# SAVE SCALERS
+# ============================================================
+
+joblib.dump(
+
+    scaler_all,
+
+    MODEL_DIR / "mlp_scaler_all.pkl"
+
+)
+
+joblib.dump(
+
+    scaler_causal,
+
+    MODEL_DIR / "mlp_scaler_causal.pkl"
+
+)
+
+print("MLP scalers saved successfully!")
+
 print("Models saved successfully!")
 
 # ============================================================

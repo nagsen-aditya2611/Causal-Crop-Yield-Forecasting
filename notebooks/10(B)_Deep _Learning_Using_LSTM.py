@@ -467,6 +467,31 @@ lstm_causal.save(
 
 print("Models Saved Successfully!")
 
+
+# ============================================================
+# SAVE LSTM SCALERS
+# ============================================================
+
+import joblib
+
+joblib.dump(
+
+    scaler_all,
+
+    MODEL_DIR / "lstm_scaler_all.pkl"
+
+)
+
+joblib.dump(
+
+    scaler_causal,
+
+    MODEL_DIR / "lstm_scaler_causal.pkl"
+
+)
+
+print("LSTM Scalers Saved Successfully!")
+
 plt.figure(figsize=(8,5))
 
 plt.plot(
