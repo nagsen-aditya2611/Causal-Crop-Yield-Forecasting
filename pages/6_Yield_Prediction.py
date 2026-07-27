@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import joblib
 
-from tensorflow.keras.models import load_model
+
 from pathlib import Path
 
 from io import BytesIO
@@ -85,9 +85,7 @@ def load_models():
 
         "LightGBM": joblib.load(MODEL_DIR / "lgb_all.pkl"),
 
-        "MLP": joblib.load(MODEL_DIR / "mlp_all_features.pkl"),
-
-        "LSTM": load_model(MODEL_DIR / "lstm_all_features.keras")
+        "MLP": joblib.load(MODEL_DIR / "mlp_all_features.pkl")
 
     }
 
@@ -102,9 +100,7 @@ def load_scalers():
 
     return {
 
-        "MLP": joblib.load(MODEL_DIR / "mlp_scaler_all.pkl"),
-
-        "LSTM": joblib.load(MODEL_DIR / "lstm_scaler_all.pkl")
+        "MLP": joblib.load(MODEL_DIR / "mlp_scaler_all.pkl")
 
     }
 
@@ -125,23 +121,21 @@ with col1:
 
     selected_model = st.selectbox(
 
-        "Select Prediction Model",
+    "Select Prediction Model",
 
-        [
+    [
 
-            "Random Forest",
+        "Random Forest",
 
-            "XGBoost",
+        "XGBoost",
 
-            "LightGBM",
+        "LightGBM",
 
-            "MLP",
+        "MLP"
 
-            "LSTM"
+    ]
 
-        ]
-
-    )
+)
 
 # ==========================================================
 # MODEL INFORMATION
@@ -179,14 +173,6 @@ model_info = {
         "desc":"Feed-forward Neural Network capable of learning nonlinear relationships.",
         "speed":"Medium",
         "accuracy":"Good"
-    },
-
-    "LSTM":
-    {
-        "emoji":"📈",
-        "desc":"Deep Learning model that captures sequential patterns in data.",
-        "speed":"Slow",
-        "accuracy":"High"
     }
 
 }
@@ -682,25 +668,7 @@ elif selected_model == "MLP":
 
     )
 
-elif selected_model == "LSTM":
 
-    X = scalers["LSTM"].transform(input_df)
-
-    X = X.astype("float32")
-
-    X = X.reshape((1,1,X.shape[1]))
-
-    prediction = float(
-
-        model.predict(
-
-            X,
-
-            verbose=0
-
-        )[0][0]
-
-    )
 
 # ==========================================================
 # ALL MODEL COMPARISON
@@ -738,24 +706,7 @@ all_predictions["MLP"] = float(
 
 )
 
-# LSTM
-X_lstm = scalers["LSTM"].transform(input_df)
 
-X_lstm = X_lstm.astype("float32")
-
-X_lstm = X_lstm.reshape((1,1,X_lstm.shape[1]))
-
-all_predictions["LSTM"] = float(
-
-    models["LSTM"].predict(
-
-        X_lstm,
-
-        verbose=0
-
-    )[0][0]
-
-)
 
 # ==========================================================
 # DASHBOARD METRICS
