@@ -1,43 +1,33 @@
-
-# Ignore raw datasets
-data/raw/
-
-# Ignore compressed files
-*.zip
-*.7z
-*.rar
-
-# Jupyter
-.ipynb_checkpoints/
-
-# Python cache
-__pycache__/
-data/raw/CY-Bench
-data/raw/GDHY
-
-=======
-# =====================================
-# Ignore raw datasets
-# =====================================
-
-data/raw/*
-!data/raw/README.md
-
 # =====================================
 # Virtual Environment
 # =====================================
-
 .venv/
 
 # =====================================
 # Python Cache
 # =====================================
-
 __pycache__/
 *.pyc
 
 # =====================================
 # VS Code
 # =====================================
-
 .vscode/
+
+# =====================================
+# Jupyter
+# =====================================
+.ipynb_checkpoints/
+
+# =====================================
+# Ignore raw datasets
+# =====================================
+data/raw/*
+!data/raw/README.md
+
+# =====================================
+# Ignore compressed files
+# =====================================
+*.zip
+*.7z
+*.rar
