@@ -1,0 +1,6 @@
+pair_name,best_E,n_rows,max_libsize,final_rho
+cwb_ssm,5,6460,150,
+ssm_fpar,5,6460,150,
+ssm_ndvi,5,6460,150,
+ssm_yield,5,6460,150,
+tavg_cwb,5,6460,150,

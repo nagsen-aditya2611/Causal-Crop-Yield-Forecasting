@@ -1,0 +1,6 @@
+x_col,y_col,pair_name
+avg_ssm_z,avg_ndvi_z,ssm_ndvi
+avg_ssm_z,avg_fpar_z,ssm_fpar
+avg_ssm_z,yield_z,ssm_yield
+avg_cwb_z,avg_ssm_z,cwb_ssm
+avg_tavg_z,avg_cwb_z,tavg_cwb

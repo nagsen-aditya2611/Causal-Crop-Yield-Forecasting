@@ -1,0 +1,7 @@
+column,below_min,above_max,min_observed,max_observed
+yield,0,0,0.107,5.86
+production,0,0,0.0,1969000.0
+harvest_area,0,0,0.0,397000.0
+avg_ndvi,0,0,0.0922222222222222,0.828947368421052
+avg_ssm,0,0,0.793917808219178,8.382296812749
+avg_fpar,0,0,3.8805,90.04

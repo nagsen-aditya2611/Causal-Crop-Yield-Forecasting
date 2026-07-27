@@ -18,6 +18,19 @@ data/
 └── processed/
 
 notebooks/
+├── 01_data_check.ipynb
+├── 02_panel_cleaning.ipynb
+├── 03_ccm_prep.ipynb
+└── 04_ccm_runs.ipynb
+
+code/
+├── io_utils.py
+├── preprocess.py
+├── features.py
+└── ccm_utils.py
+
+requirements.txt
+
 src/
 models/
 reports/

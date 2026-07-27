@@ -1,0 +1,6 @@
+pair_name,n_rows,n_units,min_year,max_year
+cwb_ssm,6715,501,2003,2017
+ssm_fpar,6715,501,2003,2017
+ssm_ndvi,6715,501,2003,2017
+ssm_yield,6715,501,2003,2017
+tavg_cwb,6715,501,2003,2017

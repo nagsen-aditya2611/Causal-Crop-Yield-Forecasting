@@ -1,0 +1,12 @@
+column,max_unique_within_adm,n_units_varying
+country_code,1,0
+latitude,1,0
+longitude,1,0
+awc,1,0
+bulk_density,1,0
+drainage_class,1,0
+region_area,1,0
+crop_area,1,0
+crop_area_percentage,1,0
+sos,1,0
+eos,1,0
