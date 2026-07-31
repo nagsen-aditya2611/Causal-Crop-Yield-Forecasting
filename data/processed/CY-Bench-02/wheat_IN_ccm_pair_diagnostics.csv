@@ -1,0 +1,9 @@
+pair_name,n_rows,n_units,year_min,year_max
+avg_prec_yield,7319,441,2001,2017
+avg_rsm_avg_fpar,6460,438,2003,2017
+avg_rsm_avg_ndvi,6460,438,2003,2017
+avg_rsm_yield,6460,438,2003,2017
+avg_ssm_avg_fpar,6460,438,2003,2017
+avg_ssm_avg_ndvi,6460,438,2003,2017
+avg_ssm_yield,6460,438,2003,2017
+avg_tavg_avg_cwb,7319,441,2001,2017

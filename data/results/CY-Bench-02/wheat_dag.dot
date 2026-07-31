@@ -1,0 +1,44 @@
+
+digraph {
+    awc -> avg_ssm;
+    awc -> avg_rsm;
+    bulk_density -> avg_ssm;
+    bulk_density -> avg_rsm;
+    drainage_class -> avg_ssm;
+    drainage_class -> avg_rsm;
+
+    avg_prec -> avg_ssm;
+    avg_prec -> avg_rsm;
+    avg_prec -> avg_cwb;
+    avg_tavg -> avg_et0;
+    avg_et0 -> avg_cwb;
+    avg_vpd -> avg_fpar;
+    avg_vpd -> avg_ndvi;
+
+    avg_ssm -> avg_ndvi;
+    avg_ssm -> avg_fpar;
+    avg_rsm -> avg_ndvi;
+    avg_rsm -> avg_fpar;
+
+    avg_tavg -> avg_ndvi;
+    avg_tavg -> avg_fpar;
+    avg_cwb -> avg_ndvi;
+    avg_cwb -> avg_fpar;
+
+    avg_ndvi -> yield;
+    avg_fpar -> yield;
+    avg_ssm -> yield;
+    avg_rsm -> yield;
+    avg_prec -> yield;
+    avg_tavg -> yield;
+    avg_cwb -> yield;
+
+    latitude -> avg_tavg;
+    latitude -> avg_prec;
+    longitude -> avg_tavg;
+    longitude -> avg_prec;
+    region_area -> harvest_area;
+
+    harvest_area -> production;
+    yield -> production;
+}

@@ -1,0 +1,5 @@
+dataset,n_rows,n_adm_ids,year_min,year_max
+yield_base,11706,520,1990,2017
+panel_after_merge,11706,520,1990,2017
+panel_common,7552,502,2001,2017
+panel_strict,6715,501,2003,2017

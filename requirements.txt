@@ -1,0 +1,13 @@
+numpy
+pandas
+matplotlib
+scikit-learn
+pyEDM
+dowhy
+networkx
+pydot
+graphviz
+jupyterlab
+notebook
+ipykernel
+openpyxl

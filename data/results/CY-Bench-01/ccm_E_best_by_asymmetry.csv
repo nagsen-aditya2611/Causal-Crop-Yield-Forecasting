@@ -1,0 +1,4 @@
+pair_name,E,n_rows,max_libsize,forward_col,reverse_col,forward_final_rho,reverse_final_rho,asymmetry_forward_minus_reverse
+ssm_fpar,8,6460,150,x:y,x:y,0.3313192441835623,0.3313192441835623,0.0
+ssm_ndvi,8,6460,150,x:y,x:y,0.47402073550838053,0.47402073550838053,0.0
+ssm_yield,8,6460,150,x:y,x:y,0.5140121137435171,0.5140121137435171,0.0

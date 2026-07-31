@@ -1,0 +1,39 @@
+treatment,outcome,estimator,estimate_value,estimand,refute_random,refute_placebo,refute_subset
+avg_ndvi,yield,backdoor.linear_regression,0.09962435739080133,"Estimand type: EstimandType.NONPARAMETRIC_ATE
+
+### Estimand : 1
+Estimand name: backdoor
+Estimand expression:
+     d                                                  
+───────────(E[⟨yield|⟩_⟨vpd,⟩_⟨rsm,⟩_⟨ssm,⟩_⟨cwb,⟩_⟨t⟩])
+d[avg_ndvi]                                             
+Estimand assumption 1, Unconfoundedness: If U→{avg_ndvi} and U→yield then P(yield|avg_ndvi,avg_vpd,avg_rsm,avg_ssm,avg_cwb,avg_tavg,U) = P(yield|avg_ndvi,avg_vpd,avg_rsm,avg_ssm,avg_cwb,avg_tavg)
+
+### Estimand : 2
+Estimand name: iv
+No such variable(s) found!
+
+### Estimand : 3
+Estimand name: frontdoor
+No such variable(s) found!
+
+### Estimand : 4
+Estimand name: general_adjustment
+Estimand expression:
+     d                                                  
+───────────(E[⟨yield|⟩_⟨rsm,⟩_⟨ssm,⟩_⟨cwb,⟩_⟨vpd,⟩_⟨t⟩])
+d[avg_ndvi]                                             
+Estimand assumption 1, Unconfoundedness: If U→{avg_ndvi} and U→yield then P(yield|avg_ndvi,avg_rsm,avg_ssm,avg_cwb,avg_vpd,avg_tavg,U) = P(yield|avg_ndvi,avg_rsm,avg_ssm,avg_cwb,avg_vpd,avg_tavg)
+","Refute: Add a random common cause
+Estimated effect:0.09962435739080133
+New effect:0.09899101131582945
+p value:0.92
+","Refute: Use a Placebo Treatment
+Estimated effect:0.09962435739080133
+New effect:0.009174873471714542
+p value:0.96
+","Refute: Use a subset of data
+Estimated effect:0.09962435739080133
+New effect:0.13372390013680524
+p value:0.8400000000000001
+"
